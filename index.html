@@ -5,13 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>No Más Fugas - Detección y Reparación de Fugas en Piscinas</title>
     <link rel="stylesheet" href="indexx.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Estilos de Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #mapa {
+      height: 500px;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container">
             <nav>
-                <div class="logo">NO MÁS FUGAS</div>
+                <a href="#" class="logo">
+                    <i class="fas fa-water logo-icon"></i>
+                    <span class="logo-text">NO MÁS FUGAS</span>
+                </a>
                 <ul class="nav-links">
                     <li><a href="#inicio">INICIO</a></li>
                     <li><a href="#empresa">EMPRESA</a></li>
@@ -19,164 +32,273 @@
                     <li><a href="#zonas">ZONAS</a></li>
                     <li><a href="#servicios">SERVICIOS</a></li>
                     <li><a href="#contacto">CONTACTO</a></li>
-                    <li><a href="#blog">BLOG</a></li>
                     <li><a href="#contacto" class="cta-button">SOLICITAR SERVICIO</a></li>
                 </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </nav>
         </div>
     </header>
 
-        <!-- Hero Section -->
-        <section class="hero" id="inicio">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>DETECCIÓN RÁPIDA DE FUGAS EN PISCINAS</h1>
-                    <p>LOCALIZACIÓN DE FUGAS DE PISCINAS SIN OBRA, REPARACIÓN SIN OBRA EN EL LUGAR EXACTO</p>
-                    <a href="#contacto" class="cta-button">SOLICITAR INFORMACIÓN</a>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1>DETECCIÓN PROFESIONAL DE FUGAS EN PISCINAS</h1>
+                <p>Tecnología avanzada para localizar y reparar fugas sin obras, garantizando resultados precisos y duraderos.</p>
+                <a href="#contacto" class="cta-button">SOLICITAR DIAGNÓSTICO</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-            <!-- Features Section -->
+    <!-- Features Section -->
     <section class="features">
         <div class="container">
             <div class="section-title">
-                <h2>PISCINAS SIN OBRA, REPARACIÓN SIN OBRA EN EL LUGAR EXACTO</h2>
+                <h2>NUESTRA METODOLOGÍA</h2>
+                <p>Soluciones tecnológicas avanzadas para la detección y reparación de fugas en piscinas</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-search-location"></i>
+                    </div>
                     <h3>Detección Precisa</h3>
-                    <p>Identificamos fugas sin necesidad de vaciar la piscina ni realizar obras destructivas.</p>
+                    <p>Utilizamos equipos de última generación para localizar fugas con precisión milimétrica sin necesidad de obras destructivas.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Rapidez</h3>
-                    <p>Diagnóstico rápido y eficiente para minimizar el tiempo de inactividad de tu piscina.</p>
+                    <div class="feature-icon">
+                        <i class="fas fa-stopwatch"></i>
+                    </div>
+                    <h3>Rapidez Garantizada</h3>
+                    <p>Diagnóstico en menos de 24 horas y reparación inmediata para minimizar la inactividad de su piscina.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🛠️</div>
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
                     <h3>Reparación Eficaz</h3>
-                    <p>Soluciones duraderas que resuelven el problema en el lugar exacto de la fuga.</p>
+                    <p>Técnicas mínimamente invasivas que resuelven el problema definitivamente en el punto exacto de la fuga.</p>
                 </div>
             </div>
         </div>
     </section>
 
-        <!-- About Section -->
-        <section class="about" id="empresa">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h2>COMPROMETIDOS CON LA CALIDAD Y PRECISIÓN</h2>
-                        <p>Somos, desde hace 23 años, empresa líder en el sector de fugas de agua en toda España.</p>
-                        <p>Ofrecemos múltiples servicios, máxima experiencia y contamos con la mejor tecnología para empresas, complejos hosteleros, colegios, todo tipo de edificios públicos y particulares.</p>
-                        <p>Contamos con personal cualificado en buceo, para que no sea necesario vaciar su piscina y obtenga la opción más económica y profesional.</p>
+    <!-- About Section -->
+    <section class="about" id="empresa">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>EXPERIENCIA Y TECNOLOGÍA</h2>
+                    <p>Con más de 23 años en el sector, somos líderes en detección y reparación de fugas en toda España. Nuestro equipo combina experiencia con la tecnología más avanzada para ofrecer soluciones definitivas.</p>
+                    <p>Contamos con especialistas certificados en buceo técnico y equipos de ultrasonidos que nos permiten trabajar sin vaciar la piscina, reduciendo costes y tiempos.</p>
+                    <p>Nuestros clientes incluyen hoteles de lujo, complejos residenciales, instalaciones deportivas y particulares que buscan la máxima calidad en el mantenimiento de sus piscinas.</p>
+                </div>
+                <div class="about-image">
+                    <img src="img/equipo-profesional.jpg" alt="Equipo profesional de No Más Fugas">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zones Section -->
+    <section class="zones" id="zonas">
+        <div class="container">
+            <div class="section-title">
+                <h2>ZONAS DE ACTUACIÓN</h2>
+                <p>COBERTURA EN TODA ANDALUCÍA Y PRINCIPALES LOCALIDADES</p>
+            </div>
+            <div class="zones-container">
+                <div class="map-container">
+                    <h2>Mapa centrado en Andalucía</h2>
+                    <div id="mapa"></div>
+                  
+                    <!-- Script de Leaflet -->
+                    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+                    <script>
+                      // Crear el mapa sin vista inicial
+                      var mapa = L.map('mapa');
+                  
+                      // Cargar tiles de OpenStreetMap
+                      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                      }).addTo(mapa);
+                  
+                      // Definir límites aproximados de Andalucía
+                      var boundsAndalucia = [
+                        [36.0, -7.5], // Suroeste (Huelva/Cádiz)
+                        [38.7, -2.5]  // Noreste (Jaén)
+                      ];
+                  
+                      // Ajustar el mapa a esos límites
+                      mapa.fitBounds(boundsAndalucia);
+                  
+                      // (Opcional) Dibujar un rectángulo sobre Andalucía
+                      L.rectangle(boundsAndalucia, {color: "#ff7800", weight: 1, fillOpacity: 0.1}).addTo(mapa);
+                    </script>
+                </div>
+                <div class="zones-info">
+                    <div class="zone-selector">
+                        <button class="zone-btn active" data-zone="cadiz">Cádiz</button>
+                        <button class="zone-btn" data-zone="sevilla">Sevilla</button>
+                        <button class="zone-btn" data-zone="malaga">Málaga</button>
+                        <button class="zone-btn" data-zone="granada">Granada</button>
+                        <button class="zone-btn" data-zone="cordoba">Córdoba</button>
+                        <button class="zone-btn" data-zone="huelva">Huelva</button>
+                        <button class="zone-btn" data-zone="almeria">Almería</button>
+                        <button class="zone-btn" data-zone="jaen">Jaén</button>
                     </div>
-                    <div class="about-image">
-                        <img src="img/equipo.jpg" alt="Equipo de No Más Fugas">
+                    <div class="zone-details" id="zoneDetails">
+                        <h3><i class="fas fa-map-marked-alt"></i> Seleccione una zona</h3>
+                        <p>Utilice los botones o el mapa interactivo para ver nuestras áreas de cobertura y servicios disponibles en cada localidad.</p>
+                    </div>
+                    <div class="zone-details" id="cadizZone" style="display: none;">
+                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Cádiz</h3>
+                        <ul class="zone-list">
+                            <li>Jerez de la Frontera</li>
+                            <li>Algeciras</li>
+                            <li>San Fernando</li>
+                            <li>El Puerto de Santa María</li>
+                            <li>Chiclana de la Frontera</li>
+                            <li>Sanlúcar de Barrameda</li>
+                            <li>La Línea de la Concepción</li>
+                            <li>Puerto Real</li>
+                            <li>Arcos de la Frontera</li>
+                            <li>Barbate</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-            <!-- Process Section -->
+    <!-- Process Section -->
     <section class="process" id="proceso">
         <div class="container">
             <div class="section-title">
                 <h2>NUESTRO PROCESO</h2>
-                <p>CÓMO TRABAJAMOS</p>
+                <p>METODOLOGÍA GARANTIZADA EN 4 PASOS</p>
             </div>
             <div class="process-steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Diagnóstico</h3>
-                    <p>Evaluamos su piscina con tecnología avanzada para localizar la fuga exacta.</p>
+                    <h3>Diagnóstico Técnico</h3>
+                    <p>Evaluación completa con equipos de ultrasonidos y cámaras termográficas para localizar el punto exacto de la fuga.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Análisis</h3>
-                    <p>Determinamos la causa de la fuga y el mejor método de reparación.</p>
+                    <h3>Análisis Profesional</h3>
+                    <p>Determinación de las causas y propuesta de solución óptima con informe técnico detallado.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Reparación</h3>
-                    <p>Realizamos la reparación sin obras, con técnicas mínimamente invasivas.</p>
+                    <h3>Reparación Especializada</h3>
+                    <p>Intervención mínimamente invasiva realizada por técnicos certificados con materiales de primera calidad.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Comprobación</h3>
-                    <p>Verificamos que la reparación haya sido efectiva y no queden fugas.</p>
+                    <h3>Control de Calidad</h3>
+                    <p>Verificación exhaustiva y garantía por escrito de la reparación realizada.</p>
                 </div>
             </div>
         </div>
     </section>
 
-        <!-- Contact Section -->
-        <section class="contact" id="contacto">
-            <div class="container">
-                <div class="section-title">
-                    <h2>CONTÁCTANOS</h2>
-                    <p>¿CÓMO PODEMOS AYUDARTE?</p>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Nombre y Apellidos</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Correo electrónico</label>
-                            <input type="email" id="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Teléfono</label>
-                            <input type="tel" id="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">¿Cómo podemos ayudarte?</label>
-                            <textarea id="message" required></textarea>
-                        </div>
-                        <div class="privacy-check">
-                            <input type="checkbox" id="privacy" required>
-                            <label for="privacy">He leído y acepto la política de privacidad</label>
-                        </div>
-                        <button type="submit" class="submit-btn">ENVIAR</button>
-                    </form>
-                </div>
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>CONTÁCTENOS</h2>
+                <p>SOLICITE UNA INSPECCIÓN SIN COMPROMISO</p>
             </div>
-        </section>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nombre completo</label>
+                        <input type="text" id="name" required placeholder="Ej: Juan Pérez García">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" required placeholder="Ej: ejemplo@dominio.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" required placeholder="Ej: 644 96 47 26">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Localidad</label>
+                        <input type="text" id="location" required placeholder="Ej: Sevilla capital">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Servicio requerido</label>
+                        <select id="service" required>
+                            <option value="">Seleccione una opción</option>
+                            <option value="deteccion">Detección de fugas</option>
+                            <option value="reparacion">Reparación de fugas</option>
+                            <option value="mantenimiento">Mantenimiento de piscina</option>
+                            <option value="inspeccion">Inspección técnica</option>
+                            <option value="otro">Otro servicio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Detalles del problema</label>
+                        <textarea id="message" required placeholder="Describa el problema que ha detectado en su piscina"></textarea>
+                    </div>
+                    <div class="privacy-check">
+                        <input type="checkbox" id="privacy" required>
+                        <label for="privacy">Acepto la política de privacidad y el tratamiento de mis datos</label>
+                    </div>
+                    <button type="submit" class="submit-btn">SOLICITAR DIAGNÓSTICO</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-            <!-- Footer -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>NO MÁS FUGAS</h3>
-                    <p>Especialistas en detección y reparación de fugas en piscinas sin obras.</p>
+                    <div class="footer-logo">
+                        <i class="fas fa-water footer-logo-icon"></i>
+                        <span class="footer-logo-text">NO MÁS FUGAS</span>
+                    </div>
+                    <p class="footer-about">Especialistas en detección y reparación de fugas en piscinas con tecnología avanzada y métodos no destructivos. Servicio en toda Andalucía con más de dos décadas de experiencia.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
                 <div class="footer-column">
                     <h3>CONTACTO</h3>
                     <ul>
-                        <li>Teléfono: 644 96 47 26</li>
-                        <li>Email: info@nomasfugas.com</li>
+                        <li><div class="contact-info"><i class="fas fa-phone"></i> 644 96 47 26</div></li>
+                        <li><div class="contact-info"><i class="fas fa-envelope"></i> info@nomasfugas.com</div></li>
+                        <li><div class="contact-info"><i class="fas fa-map-marker-alt"></i> C/ Ejemplo, 23, 41000 Sevilla</div></li>
+                        <li><div class="contact-info"><i class="fas fa-clock"></i> L-V: 9:00-14:00 / 16:00-20:00</div></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>ZONAS DE ACTUACIÓN</h3>
                     <ul>
-                        <li>Cádiz</li>
-                        <li>Sevilla</li>
-                        <li>Málaga</li>
-                        <li>Toda Andalucía</li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Cádiz y provincia</a></li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Sevilla y provincia</a></li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Málaga y Costa del Sol</a></li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Granada y Almería</a></li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Córdoba y Jaén</a></li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Huelva y costa</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>LEGAL</h3>
+                    <h3>INFORMACIÓN</h3>
                     <ul>
-                        <li><a href="#">Política de Privacidad</a></li>
-                        <li><a href="#">Aviso Legal</a></li>
-                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Política de privacidad</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Aviso legal</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Política de cookies</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Garantías</a></li>
                     </ul>
                 </div>
             </div>
@@ -185,5 +307,10 @@
             </div>
         </div>
     </footer>
+
+  <!-- Script de Google Maps API (reemplaza TU_API_KEY por tu clave real) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap&libraries=&v=weekly" async defer></script>
+
+  <script src="funcion.js"></script>
 </body>
 </html>
