@@ -361,6 +361,10 @@ nav {
 
 .zone-list {
     list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* ← Dos columnas */
+    gap: 0.5rem 2rem; /* Espaciado entre ítems y columnas */
+    padding-left: 1rem;
 }
 
 .zone-list li {
@@ -371,7 +375,7 @@ nav {
 }
 
 .zone-list li::before {
-    content: '\f054';
+    content: '\f054'; /* Icono de Font Awesome */
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     position: absolute;
@@ -380,7 +384,6 @@ nav {
     color: var(--accent);
     font-size: 0.8rem;
 }
-
 .zone-selector {
     display: flex;
     flex-wrap: wrap;

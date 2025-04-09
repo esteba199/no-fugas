@@ -17,3 +17,26 @@
               ]
           });
       }
+
+    const buttons = document.querySelectorAll('.zone-btn');
+    const allZones = document.querySelectorAll('.zone-details');
+    const defaultDetails = document.getElementById('zoneDetails');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remover "active" de todos los botones
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Ocultar todas las zonas
+            allZones.forEach(zone => zone.style.display = 'none');
+
+            // Mostrar la zona seleccionada
+            const selectedZone = document.getElementById(button.dataset.zone + 'Zone');
+            if (selectedZone) {
+                selectedZone.style.display = 'block';
+            } else {
+                defaultDetails.style.display = 'block';
+            }
+        });
+    });

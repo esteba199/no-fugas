@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="indexx.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Estilos de Leaflet -->
+    <!-- Estilos de Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     #mapa {
@@ -30,9 +30,8 @@
                     <li><a href="#empresa">EMPRESA</a></li>
                     <li><a href="#proceso">PROCESO</a></li>
                     <li><a href="#zonas">ZONAS</a></li>
-                    <li><a href="#servicios">SERVICIOS</a></li>
                     <li><a href="#contacto">CONTACTO</a></li>
-                    <li><a href="#contacto" class="cta-button">SOLICITAR SERVICIO</a></li>
+                    <li><a href="#servicio" class="cta-button">SOLICITAR SERVICIO</a></li>
                 </ul>
                 <button class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -136,7 +135,10 @@
                   
                       // (Opcional) Dibujar un rectángulo sobre Andalucía
                       L.rectangle(boundsAndalucia, {color: "#ff7800", weight: 1, fillOpacity: 0.1}).addTo(mapa);
+
+
                     </script>
+                    <link rel="stylesheet" href="zona.html">
                 </div>
                 <div class="zones-info">
                     <div class="zone-selector">
@@ -166,8 +168,169 @@
                             <li>Puerto Real</li>
                             <li>Arcos de la Frontera</li>
                             <li>Barbate</li>
+                            <li>Rota</li>
+                            <li>Conil de la Frontera</li>
+                            <li>Ubrique</li>
+                            <li>Chipiona</li>
+                            <li>Pueblos de la sierra (Olvera, Medina, Bornos, ETC.)</li>
+                            <li>Trebujena</li>
                         </ul>
                     </div>
+                     <!-- Sevilla -->
+                    <div class="zone-details" id="sevillaZone" style="display: none;">
+                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Sevilla</h3>
+                        <ul class="zone-list">
+                            <li>Sevilla capital</li>
+                            <li>Dos Hermanas</li>
+                            <li>Utrera</li>
+                            <li>Alcalá de Guadaíra</li>
+                            <li>Écija</li>
+                            <li>La Rinconada</li>
+                            <li>Coria del Río</li>
+                            <li>Lebrija</li>
+                            <li>Camas</li>
+                            <li>San Juan de Aznalfarache</li>
+                            <li>La Algaba</li>
+                            <li>Tomares</li>
+                            <li>Mairena del Aljarafe</li>
+                            <li>Los Palacios y Villafranca</li>
+                            <li>Morón de la Frontera</li>
+                            <li>Marchena</li>
+                        </ul>
+                    </div>
+                    <!-- Málaga -->
+                    <div class="zone-details" id="malagaZone" style="display: none;">
+                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Málaga</h3>
+                        <ul class="zone-list">
+                            <li>Málaga capital</li>
+                            <li>Marbella</li>
+                            <li>Estepona</li>
+                            <li>Fuengirola</li>
+                            <li>Benalmádena</li>
+                            <li>Torremolinos</li>
+                            <li>Rincón de la Victoria</li>
+                            <li>Vélez-Málaga</li>
+                            <li>Antequera</li>
+                            <li>Nerja</li>
+                            <li>Ronda</li>
+                            <li>Coín</li>
+                            <li>Alhaurín de la Torre</li>
+                            <li>Alhaurín el Grande</li>
+                            <li>Cártama</li>
+                            <li>Torre del Mar</li>
+                        </ul>
+                    </div>
+                        <!-- Granada -->
+                    <div class="zone-details" id="granadaZone" style="display: none;">
+                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Granada</h3>
+                        <ul class="zone-list">
+                            <li>Granada capital</li>
+                            <li>Motril</li>
+                            <li>Armilla</li>
+                            <li>Almuñécar</li>
+                            <li>Maracena</li>
+                            <li>Atarfe</li>
+                            <li>Santa Fe</li>
+                            <li>Baza</li>
+                            <li>Guadix</li>
+                            <li>Las Gabias</li>
+                            <li>La Zubia</li>
+                            <li>Loja</li>
+                            <li>Salobreña</li>
+                            <li>Huétor Vega</li>
+                            <li>Ogíjares</li>
+                            <li>Pinos Puente</li>
+                        </ul>
+                    </div>
+                    <!-- Córdoba -->
+                    <div class="zone-details" id="cordobaZone" style="display: none;">
+                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Córdoba</h3>
+                        <ul class="zone-list">
+                            <li>Córdoba capital</li>
+                            <li>Lucena</li>
+                            <li>Puente Genil</li>
+                            <li>Montilla</li>
+                            <li>Priego de Córdoba</li>
+                            <li>Cabra</li>
+                            <li>Baena</li>
+                            <li>La Carlota</li>
+                            <li>Palma del Río</li>
+                            <li>Peñarroya-Pueblonuevo</li>
+                            <li>Rute</li>
+                            <li>Fernán Núñez</li>
+                            <li>Aguilar de la Frontera</li>
+                            <li>Villa del Río</li>
+                            <li>Posadas</li>
+                            <li>Hinojosa del Duque</li>
+                        </ul>
+                    </div>         
+                    <!-- Huelva -->
+                    <div class="zone-details" id="huelvaZone" style="display: none;">
+                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Huelva</h3>
+                        <ul class="zone-list">
+                            <li>Huelva capital</li>
+                            <li>Lepe</li>
+                            <li>Isla Cristina</li>
+                            <li>Ayamonte</li>
+                            <li>Moguer</li>
+                            <li>Cartaya</li>
+                            <li>Almonte</li>
+                            <li>Punta Umbría</li>
+                            <li>Aracena</li>
+                            <li>La Palma del Condado</li>
+                            <li>Valverde del Camino</li>
+                            <li>San Juan del Puerto</li>
+                            <li>Gibraleón</li>
+                            <li>Palos de la Frontera</li>
+                            <li>Trigueros</li>
+                            <li>Bollullos Par del Condado</li>
+                        </ul>
+                    </div>
+                    <!-- Almería -->
+                    <div class="zone-details" id="almeriaZone" style="display: none;">
+                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Almería</h3>
+                        <ul class="zone-list">
+                            <li>Almería capital</li>
+                            <li>Roquetas de Mar</li>
+                            <li>El Ejido</li>
+                            <li>Vícar</li>
+                            <li>Adra</li>
+                            <li>Huércal-Overa</li>
+                            <li>Níjar</li>
+                            <li>Carboneras</li>
+                            <li>Vera</li>
+                            <li>Garrucha</li>
+                            <li>Berja</li>
+                            <li>Huércal de Almería</li>
+                            <li>Mojácar</li>
+                            <li>Albox</li>
+                            <li>Pulpí</li>
+                            <li>Macáel</li>
+                        </ul>
+                    </div>
+                    <!-- Jaén -->
+                        <div class="zone-details" id="jaenZone" style="display: none;">
+                            <h3><i class="fas fa-map-marked-alt"></i> Provincia de Jaén</h3>
+                            <ul class="zone-list">
+                                <li>Jaén capital</li>
+                                <li>Linares</li>
+                                <li>Andújar</li>
+                                <li>Úbeda</li>
+                                <li>Baeza</li>
+                                <li>Martos</li>
+                                <li>Alcalá la Real</li>
+                                <li>La Carolina</li>
+                                <li>Torredelcampo</li>
+                                <li>Torredonjimeno</li>
+                                <li>Bailén</li>
+                                <li>Villacarrillo</li>
+                                <li>Castillo de Locubín</li>
+                                <li>Huelma</li>
+                                <li>Jódar</li>
+                                <li>Pozo Alcón</li>
+                            </ul>
+                        </div>
+                    </div>       
                 </div>
             </div>
         </div>
@@ -206,7 +369,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contacto">
+    <section class="contact" id="servicio">
         <div class="container">
             <div class="section-title">
                 <h2>CONTÁCTENOS</h2>
@@ -272,7 +435,7 @@
                         <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="footer-column">
+                <div class="footer-column" id="contacto">
                     <h3>CONTACTO</h3>
                     <ul>
                         <li><div class="contact-info"><i class="fas fa-phone"></i> 644 96 47 26</div></li>
