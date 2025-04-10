@@ -110,276 +110,221 @@
         </div>
     </section>
 
-    <!-- Zones Section -->
-    <section class="zones" id="zonas">
-        <div class="container">
-            <div class="section-title">
-                <h2>ZONAS DE ACTUACIÓN</h2>
-                <p>COBERTURA EN TODA ANDALUCÍA Y PRINCIPALES LOCALIDADES</p>
+<!-- Zones Section -->
+<section class="zones" id="zonas">
+    <div class="container">
+        <div class="section-title">
+            <h2>ZONAS DE ACTUACIÓN</h2>
+            <p>COBERTURA EN TODA ANDALUCÍA Y PRINCIPALES LOCALIDADES</p>
+        </div>
+        <div class="zones-container">
+            <div class="map-container">
+                <h2>Mapa centrado en Andalucía</h2>
+                <div id="mapa" style="height: 400px;"></div>
+
+                <!-- Leaflet -->
+                <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+                <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+                <script>
+                  // Inicializar el mapa
+                  var mapa = L.map('mapa');
+                  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                  }).addTo(mapa);
+
+                  // Definir límites de Andalucía y centrar al inicio
+                  var boundsAndalucia = [
+                    [36.0, -7.5],
+                    [38.7, -2.5]
+                  ];
+                  mapa.fitBounds(boundsAndalucia);
+
+                  // Opcional: rectángulo sobre la región
+                  L.rectangle(boundsAndalucia, {color: "#ff7800", weight: 1, fillOpacity: 0.1}).addTo(mapa);
+
+                  // Coordenadas de provincias
+                  const zonas = {
+                    cadiz: [36.5168, -6.2994],
+                    sevilla: [37.3886, -5.9823],
+                    malaga: [36.7213, -4.4214],
+                    huelva: [37.2614, -6.9447],
+                  };
+
+                  let marker;
+
+                  document.addEventListener("DOMContentLoaded", () => {
+                    const buttons = document.querySelectorAll(".zone-btn");
+
+                    buttons.forEach(btn => {
+                      btn.addEventListener("click", function () {
+                        const zona = this.dataset.zone;
+
+                        // Activar botón actual
+                        buttons.forEach(b => b.classList.remove("active"));
+                        this.classList.add("active");
+
+                        // Ocultar todas las zonas
+                        document.querySelectorAll(".zone-details").forEach(z => z.style.display = "none");
+
+                        // Mostrar la zona seleccionada
+                        const detalle = document.getElementById(zona + "Zone");
+                        if (detalle) {
+                          detalle.style.display = "block";
+                          detalle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+
+                        // Centrar mapa y agregar marcador
+                        if (zonas[zona]) {
+                          mapa.setView(zonas[zona], 10);
+                          if (marker) mapa.removeLayer(marker);
+                          marker = L.marker(zonas[zona]).addTo(mapa).bindPopup("Provincia de " + zona.charAt(0).toUpperCase() + zona.slice(1)).openPopup();
+                        }
+                      });
+                    });
+                  });
+                </script>
             </div>
-            <div class="zones-container">
-                <div class="map-container">
-                    <h2>Mapa centrado en Andalucía</h2>
-                    <div id="mapa"></div>
-                  
-                    <!-- Script de Leaflet -->
-                    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-                    <script>
-                      // Crear el mapa sin vista inicial
-                      var mapa = L.map('mapa');
-                  
-                      // Cargar tiles de OpenStreetMap
-                      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; OpenStreetMap contributors'
-                      }).addTo(mapa);
-                  
-                      // Definir límites aproximados de Andalucía
-                      var boundsAndalucia = [
-                        [36.0, -7.5], // Suroeste (Huelva/Cádiz)
-                        [38.7, -2.5]  // Noreste (Jaén)
-                      ];
-                  
-                      // Ajustar el mapa a esos límites
-                      mapa.fitBounds(boundsAndalucia);
-                  
-                      // (Opcional) Dibujar un rectángulo sobre Andalucía
-                      L.rectangle(boundsAndalucia, {color: "#ff7800", weight: 1, fillOpacity: 0.1}).addTo(mapa);
 
-
-                    </script>
-                    <link rel="stylesheet" href="zona.html">
+            <div class="zones-info">
+                <div class="zone-selector">
+                    <button class="zone-btn active" data-zone="cadiz">Cádiz</button>
+                    <button class="zone-btn" data-zone="sevilla">Sevilla</button>
+                    <button class="zone-btn" data-zone="malaga">Málaga</button>
+                    <button class="zone-btn" data-zone="huelva">Huelva</button>
                 </div>
-                <div class="zones-info">
-                    <div class="zone-selector">
-                        <button class="zone-btn active" data-zone="cadiz">Cádiz</button>
-                        <button class="zone-btn" data-zone="sevilla">Sevilla</button>
-                        <button class="zone-btn" data-zone="malaga">Málaga</button>
-                        <button class="zone-btn" data-zone="granada">Granada</button>
-                        <button class="zone-btn" data-zone="cordoba">Córdoba</button>
-                        <button class="zone-btn" data-zone="huelva">Huelva</button>
-                        <button class="zone-btn" data-zone="almeria">Almería</button>
-                        <button class="zone-btn" data-zone="jaen">Jaén</button>
-                    </div>
-                    <div class="zone-details" id="zoneDetails">
-                        <h3><i class="fas fa-map-marked-alt"></i> Seleccione una zona</h3>
-                        <p>Utilice los botones o el mapa interactivo para ver nuestras áreas de cobertura y servicios disponibles en cada localidad.</p>
-                    </div>
-                    <div class="zone-details" id="cadizZone" style="display: none;">
-                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Cádiz</h3>
-                        <ul class="zone-list">
-                            <li>Jerez de la Frontera</li>
-                            <li>Algeciras</li>
-                            <li>San Fernando</li>
-                            <li>El Puerto de Santa María</li>
-                            <li>Chiclana de la Frontera</li>
-                            <li>Sanlúcar de Barrameda</li>
-                            <li>La Línea de la Concepción</li>
-                            <li>Puerto Real</li>
-                            <li>Arcos de la Frontera</li>
-                            <li>Barbate</li>
-                            <li>Rota</li>
-                            <li>Conil de la Frontera</li>
-                            <li>Ubrique</li>
-                            <li>Chipiona</li>
-                            <li>Pueblos de la sierra (Olvera, Medina, Bornos, ETC.)</li>
-                            <li>Trebujena</li>
-                        </ul>
-                    </div>
-                     <!-- Sevilla -->
-                    <div class="zone-details" id="sevillaZone" style="display: none;">
-                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Sevilla</h3>
-                        <ul class="zone-list">
-                            <li>Sevilla capital</li>
-                            <li>Dos Hermanas</li>
-                            <li>Utrera</li>
-                            <li>Alcalá de Guadaíra</li>
-                            <li>Écija</li>
-                            <li>La Rinconada</li>
-                            <li>Coria del Río</li>
-                            <li>Lebrija</li>
-                            <li>Camas</li>
-                            <li>San Juan de Aznalfarache</li>
-                            <li>La Algaba</li>
-                            <li>Tomares</li>
-                            <li>Mairena del Aljarafe</li>
-                            <li>Los Palacios y Villafranca</li>
-                            <li>Morón de la Frontera</li>
-                            <li>Marchena</li>
-                        </ul>
-                    </div>
-                    <!-- Málaga -->
-                    <div class="zone-details" id="malagaZone" style="display: none;">
-                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Málaga</h3>
-                        <ul class="zone-list">
-                            <li>Málaga capital</li>
-                            <li>Marbella</li>
-                            <li>Estepona</li>
-                            <li>Fuengirola</li>
-                            <li>Benalmádena</li>
-                            <li>Torremolinos</li>
-                            <li>Rincón de la Victoria</li>
-                            <li>Vélez-Málaga</li>
-                            <li>Antequera</li>
-                            <li>Nerja</li>
-                            <li>Ronda</li>
-                            <li>Coín</li>
-                            <li>Alhaurín de la Torre</li>
-                            <li>Alhaurín el Grande</li>
-                            <li>Cártama</li>
-                            <li>Torre del Mar</li>
-                        </ul>
-                    </div>
-                        <!-- Granada -->
-                    <div class="zone-details" id="granadaZone" style="display: none;">
-                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Granada</h3>
-                        <ul class="zone-list">
-                            <li>Granada capital</li>
-                            <li>Motril</li>
-                            <li>Armilla</li>
-                            <li>Almuñécar</li>
-                            <li>Maracena</li>
-                            <li>Atarfe</li>
-                            <li>Santa Fe</li>
-                            <li>Baza</li>
-                            <li>Guadix</li>
-                            <li>Las Gabias</li>
-                            <li>La Zubia</li>
-                            <li>Loja</li>
-                            <li>Salobreña</li>
-                            <li>Huétor Vega</li>
-                            <li>Ogíjares</li>
-                            <li>Pinos Puente</li>
-                        </ul>
-                    </div>
-                    <!-- Córdoba -->
-                    <div class="zone-details" id="cordobaZone" style="display: none;">
-                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Córdoba</h3>
-                        <ul class="zone-list">
-                            <li>Córdoba capital</li>
-                            <li>Lucena</li>
-                            <li>Puente Genil</li>
-                            <li>Montilla</li>
-                            <li>Priego de Córdoba</li>
-                            <li>Cabra</li>
-                            <li>Baena</li>
-                            <li>La Carlota</li>
-                            <li>Palma del Río</li>
-                            <li>Peñarroya-Pueblonuevo</li>
-                            <li>Rute</li>
-                            <li>Fernán Núñez</li>
-                            <li>Aguilar de la Frontera</li>
-                            <li>Villa del Río</li>
-                            <li>Posadas</li>
-                            <li>Hinojosa del Duque</li>
-                        </ul>
-                    </div>         
-                    <!-- Huelva -->
-                    <div class="zone-details" id="huelvaZone" style="display: none;">
-                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Huelva</h3>
-                        <ul class="zone-list">
-                            <li>Huelva capital</li>
-                            <li>Lepe</li>
-                            <li>Isla Cristina</li>
-                            <li>Ayamonte</li>
-                            <li>Moguer</li>
-                            <li>Cartaya</li>
-                            <li>Almonte</li>
-                            <li>Punta Umbría</li>
-                            <li>Aracena</li>
-                            <li>La Palma del Condado</li>
-                            <li>Valverde del Camino</li>
-                            <li>San Juan del Puerto</li>
-                            <li>Gibraleón</li>
-                            <li>Palos de la Frontera</li>
-                            <li>Trigueros</li>
-                            <li>Bollullos Par del Condado</li>
-                        </ul>
-                    </div>
-                    <!-- Almería -->
-                    <div class="zone-details" id="almeriaZone" style="display: none;">
-                        <h3><i class="fas fa-map-marked-alt"></i> Provincia de Almería</h3>
-                        <ul class="zone-list">
-                            <li>Almería capital</li>
-                            <li>Roquetas de Mar</li>
-                            <li>El Ejido</li>
-                            <li>Vícar</li>
-                            <li>Adra</li>
-                            <li>Huércal-Overa</li>
-                            <li>Níjar</li>
-                            <li>Carboneras</li>
-                            <li>Vera</li>
-                            <li>Garrucha</li>
-                            <li>Berja</li>
-                            <li>Huércal de Almería</li>
-                            <li>Mojácar</li>
-                            <li>Albox</li>
-                            <li>Pulpí</li>
-                            <li>Macáel</li>
-                        </ul>
-                    </div>
-                    <!-- Jaén -->
-                        <div class="zone-details" id="jaenZone" style="display: none;">
-                            <h3><i class="fas fa-map-marked-alt"></i> Provincia de Jaén</h3>
-                            <ul class="zone-list">
-                                <li>Jaén capital</li>
-                                <li>Linares</li>
-                                <li>Andújar</li>
-                                <li>Úbeda</li>
-                                <li>Baeza</li>
-                                <li>Martos</li>
-                                <li>Alcalá la Real</li>
-                                <li>La Carolina</li>
-                                <li>Torredelcampo</li>
-                                <li>Torredonjimeno</li>
-                                <li>Bailén</li>
-                                <li>Villacarrillo</li>
-                                <li>Castillo de Locubín</li>
-                                <li>Huelma</li>
-                                <li>Jódar</li>
-                                <li>Pozo Alcón</li>
-                            </ul>
-                        </div>
-                    </div>       
+
+                <!-- Zona por defecto visible -->
+                <div class="zone-details" id="cadizZone" style="display: block;">
+                    <h3><i class="fas fa-map-marked-alt"></i> Provincia de Cádiz</h3>
+                    <ul class="zone-list">
+                        <li>Jerez de la Frontera</li>
+                        <li>Algeciras</li>
+                        <li>San Fernando</li>
+                        <li>El Puerto de Santa María</li>
+                        <li>Chiclana de la Frontera</li>
+                        <li>Sanlúcar de Barrameda</li>
+                        <li>La Línea de la Concepción</li>
+                        <li>Puerto Real</li>
+                        <li>Arcos de la Frontera</li>
+                        <li>Barbate</li>
+                        <li>Rota</li>
+                        <li>Conil de la Frontera</li>
+                        <li>Ubrique</li>
+                        <li>Chipiona</li>
+                        <li>Pueblos de la sierra (Olvera, Medina, Bornos, ETC.)</li>
+                        <li>Trebujena</li>
+                    </ul>
+                </div>
+
+                <!-- Sevilla -->
+                <div class="zone-details" id="sevillaZone" style="display: none;">
+                    <h3><i class="fas fa-map-marked-alt"></i> Provincia de Sevilla</h3>
+                    <ul class="zone-list">
+                        <li>Sevilla capital</li>
+                        <li>Dos Hermanas</li>
+                        <li>Utrera</li>
+                        <li>Alcalá de Guadaíra</li>
+                        <li>Écija</li>
+                        <li>La Rinconada</li>
+                        <li>Coria del Río</li>
+                        <li>Lebrija</li>
+                        <li>Camas</li>
+                        <li>San Juan de Aznalfarache</li>
+                        <li>La Algaba</li>
+                        <li>Tomares</li>
+                        <li>Mairena del Aljarafe</li>
+                        <li>Los Palacios y Villafranca</li>
+                        <li>Morón de la Frontera</li>
+                        <li>Marchena</li>
+                    </ul>
+                </div>
+
+                <!-- Málaga -->
+                <div class="zone-details" id="malagaZone" style="display: none;">
+                    <h3><i class="fas fa-map-marked-alt"></i> Provincia de Málaga</h3>
+                    <ul class="zone-list">
+                        <li>Málaga capital</li>
+                        <li>Marbella</li>
+                        <li>Estepona</li>
+                        <li>Fuengirola</li>
+                        <li>Benalmádena</li>
+                        <li>Torremolinos</li>
+                        <li>Rincón de la Victoria</li>
+                        <li>Vélez-Málaga</li>
+                        <li>Antequera</li>
+                        <li>Nerja</li>
+                        <li>Ronda</li>
+                        <li>Coín</li>
+                        <li>Alhaurín de la Torre</li>
+                        <li>Alhaurín el Grande</li>
+                        <li>Cártama</li>
+                        <li>Torre del Mar</li>
+                    </ul>
+                </div>
+
+                <!-- Huelva -->
+                <div class="zone-details" id="huelvaZone" style="display: none;">
+                    <h3><i class="fas fa-map-marked-alt"></i> Provincia de Huelva</h3>
+                    <ul class="zone-list">
+                        <li>Huelva capital</li>
+                        <li>Lepe</li>
+                        <li>Isla Cristina</li>
+                        <li>Ayamonte</li>
+                        <li>Moguer</li>
+                        <li>Cartaya</li>
+                        <li>Almonte</li>
+                        <li>Punta Umbría</li>
+                        <li>Aracena</li>
+                        <li>La Palma del Condado</li>
+                        <li>Valverde del Camino</li>
+                        <li>San Juan del Puerto</li>
+                        <li>Gibraleón</li>
+                        <li>Palos de la Frontera</li>
+                        <li>Trigueros</li>
+                        <li>Bollullos Par del Condado</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Process Section -->
-    <section class="process" id="proceso">
-        <div class="container">
-            <div class="section-title">
-                <h2>NUESTRO PROCESO</h2>
-                <p>METODOLOGÍA GARANTIZADA EN 4 PASOS</p>
+<!-- Process Section -->
+<section class="process" id="proceso">
+    <div class="container">
+        <div class="section-title">
+            <h2>NUESTRO PROCESO</h2>
+            <p>METODOLOGÍA GARANTIZADA EN 4 PASOS</p>
+        </div>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Diagnóstico Técnico</h3>                
+                <p>Evaluación completa con equipos de ultrasonidos y cámaras termográficas para localizar el punto exacto de la fuga.</p>
+                <img src="ruta-de-tu-imagen.jpg" alt="Imagen ilustrativa" class="step-img">
             </div>
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Diagnóstico Técnico</h3>                
-                    <p>Evaluación completa con equipos de ultrasonidos y cámaras termográficas para localizar el punto exacto de la fuga.</p>
-                    <img src="ruta-de-tu-imagen.jpg" alt="Imagen ilustrativa" class="step-img">
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Análisis Profesional</h3>
-                    <p>Determinación de las causas y propuesta de solución óptima con informe técnico detallado.</p>
-                    <img src="" alt="Imagen ilustrativa" class="step-img">
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Reparación Especializada</h3>                
-                    <p>Intervención mínimamente invasiva realizada por técnicos certificados con materiales de primera calidad.</p>
-                    <img src="" alt="Imagen ilustrativa" class="step-img">
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Control de Calidad</h3>
-                    <p>Verificación exhaustiva y garantía por escrito de la reparación realizada.</p>
-                    <img src="" alt="Imagen ilustrativa" class="step-img">
-                </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Análisis Profesional</h3>
+                <p>Determinación de las causas y propuesta de solución óptima con informe técnico detallado.</p>
+                <img src="" alt="Imagen ilustrativa" class="step-img">
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Reparación Especializada</h3>                
+                <p>Intervención mínimamente invasiva realizada por técnicos certificados con materiales de primera calidad.</p>
+                <img src="" alt="Imagen ilustrativa" class="step-img">
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Control de Calidad</h3>
+                <p>Verificación exhaustiva y garantía por escrito de la reparación realizada.</p>
+                <img src="" alt="Imagen ilustrativa" class="step-img">
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Contact Section -->
     <section class="contact" id="servicio">
@@ -460,12 +405,10 @@
                 <div class="footer-column">
                     <h3>ZONAS DE ACTUACIÓN</h3>
                     <ul>
-                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Cádiz y provincia</a></li>
-                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Sevilla y provincia</a></li>
-                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Málaga y Costa del Sol</a></li>
-                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Granada y Almería</a></li>
-                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Córdoba y Jaén</a></li>
-                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Huelva y costa</a></li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Cádiz </a></li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Sevilla </a></li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Málaga </a></li>
+                        <li><a href="#zonas"><i class="fas fa-chevron-right"></i> Huelva </a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
